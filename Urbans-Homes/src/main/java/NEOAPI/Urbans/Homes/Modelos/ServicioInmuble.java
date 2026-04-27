@@ -1,14 +1,19 @@
 package NEOAPI.Urbans.Homes.Modelos;
 
-public class ServiContrato {
+public class ServicioInmuble {
     private int idServiContrato;
     private int idServicio;
     private int idContrato;
 
-    public ServiContrato() {}
+    public ServicioInmuble() {}
 
-    public ServiContrato(int idServiContrato, int idServicio, int idContrato) {
+    public ServicioInmuble(int idServiContrato, int idServicio, int idContrato) {
         this.idServiContrato = idServiContrato;
+        this.idServicio = idServicio;
+        this.idContrato = idContrato;
+    }
+
+    public ServicioInmuble(int idServicio, int idContrato) {
         this.idServicio = idServicio;
         this.idContrato = idContrato;
     }
@@ -39,6 +44,8 @@ public class ServiContrato {
 
     @Override
     public String toString() {
-        return idServiContrato + " - Servicio:" + idServicio + " - Contrato:" + idContrato;
+        return "ServicioInmuble [ID=" + idServiContrato +
+                ", Servicio=" + idServicio +
+                ", Contrato=" + idContrato + "]";
     }
 }
