@@ -12,40 +12,39 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import NEOAPI.Urbans.Homes.Modelos.Usuario;
-import NEOAPI.Urbans.Homes.servicios.UsuarioServicio;
+import NEOAPI.Urbans.Homes.Modelos.PagoArriendo;
+import NEOAPI.Urbans.Homes.servicios.PagoArrrendoServicio;
 
 
 @RestController
-@RequestMapping("/api/v1/usuarios")
-public class ControladorUsuario {
+@RequestMapping("/api/v1/pagos")
+public class ControladorPagoArriedo {
 
     @Autowired
-    UsuarioServicio servicio;
+    PagoArrrendoServicio servicio;
 
     @PostMapping
-    public ResponseEntity<?> guardar(@RequestBody Usuario datos){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.guardar_usuario(datos));
+    public ResponseEntity<?> guardar(@RequestBody PagoArriendo datos){
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.guardar_pago(datos));
     }
 
     @GetMapping
     public ResponseEntity<?> listar(){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.listar_usuarios());
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.listar_pagos());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> modificar(@PathVariable Integer id, @RequestBody Usuario datos){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.modificar_usuario(id, datos));
+    public ResponseEntity<?> modificar(@PathVariable Integer id, @RequestBody PagoArriendo datos){
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.modificar_pago(id, datos));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Integer id){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.eliminar_usuario(id));
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.eliminar_pago(id));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> buscar(@PathVariable Integer id){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.buscar_usuario_por_id(id));
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.buscar_pago_por_id(id));
     }
 }
-

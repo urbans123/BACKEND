@@ -12,40 +12,39 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import NEOAPI.Urbans.Homes.Modelos.Usuario;
-import NEOAPI.Urbans.Homes.servicios.UsuarioServicio;
+import NEOAPI.Urbans.Homes.Modelos.Inmuebles;
+import NEOAPI.Urbans.Homes.servicios.InmueblesServicio;
 
 
 @RestController
-@RequestMapping("/api/v1/usuarios")
-public class ControladorUsuario {
+@RequestMapping("/api/v1/inmuebles")
+public class ControladorInmuebles {
 
     @Autowired
-    UsuarioServicio servicio;
+    InmueblesServicio servicio;
 
     @PostMapping
-    public ResponseEntity<?> guardar(@RequestBody Usuario datos){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.guardar_usuario(datos));
+    public ResponseEntity<?> guardar(@RequestBody Inmuebles datos){
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.guardar_inmueble(datos));
     }
 
     @GetMapping
     public ResponseEntity<?> listar(){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.listar_usuarios());
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.listar_inmuebles());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> modificar(@PathVariable Integer id, @RequestBody Usuario datos){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.modificar_usuario(id, datos));
+    public ResponseEntity<?> modificar(@PathVariable Integer id, @RequestBody Inmuebles datos){
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.modificar_inmueble(id, datos));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Integer id){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.eliminar_usuario(id));
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.eliminar_inmueble(id));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> buscar(@PathVariable Integer id){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.buscar_usuario_por_id(id));
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.buscar_inmueble_por_id(id));
     }
 }
-

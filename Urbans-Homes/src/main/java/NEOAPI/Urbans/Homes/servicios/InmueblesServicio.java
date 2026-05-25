@@ -40,4 +40,34 @@ public class InmueblesServicio {
         return repositorio.findAll();
     }
 
+    public Inmuebles modificar_inmueble(Integer id, Inmuebles datosInmueble) {
+        Inmuebles inmuebleExistente = repositorio.findById(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Inmueble no encontrado"));
+        
+        if (datosInmueble.getDireccion() != null && !datosInmueble.getDireccion().isBlank()) {
+            inmuebleExistente.setDireccion(datosInmueble.getDireccion());
+        }
+        if (datosInmueble.getTipoDePropiedad() != null && !datosInmueble.getTipoDePropiedad().isBlank()) {
+            inmuebleExistente.setTipoDePropiedad(datosInmueble.getTipoDePropiedad());
+        }
+        if (datosInmueble.getAreaM2() > 0) {
+            inmuebleExistente.setAreaM2(datosInmueble.getAreaM2());
+        }
+        
+        return repositorio.save(inmuebleExistente);
+    }
+
+    public String eliminar_inmueble(Integer id) {
+        if (!repositorio.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Inmueble no encontrado");
+        }
+        repositorio.deleteById(id);
+        return "Inmueble eliminado correctamente";
+    }
+
+    public Inmuebles buscar_inmueble_por_id(Integer id) {
+        return repositorio.findById(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Inmueble no encontrado"));
+    }
+
 }
