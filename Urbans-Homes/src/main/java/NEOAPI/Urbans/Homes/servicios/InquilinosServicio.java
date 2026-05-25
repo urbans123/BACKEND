@@ -40,4 +40,34 @@ public class InquilinosServicio {
         return repositorio.findAll();
     }
 
+    public Inquilinos modificar_inquilino(Integer id, Inquilinos datosInquilino) {
+        Inquilinos inquilinoExistente = repositorio.findById(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Inquilino no encontrado"));
+        
+        if (datosInquilino.getNombreComple() != null && !datosInquilino.getNombreComple().isBlank()) {
+            inquilinoExistente.setNombreComple(datosInquilino.getNombreComple());
+        }
+        if (datosInquilino.getCorreo() != null && !datosInquilino.getCorreo().isBlank()) {
+            inquilinoExistente.setCorreo(datosInquilino.getCorreo());
+        }
+        if (datosInquilino.getNrotel() != null && !datosInquilino.getNrotel().isBlank()) {
+            inquilinoExistente.setNrotel(datosInquilino.getNrotel());
+        }
+        
+        return repositorio.save(inquilinoExistente);
+    }
+
+    public String eliminar_inquilino(Integer id) {
+        if (!repositorio.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Inquilino no encontrado");
+        }
+        repositorio.deleteById(id);
+        return "Inquilino eliminado correctamente";
+    }
+
+    public Inquilinos buscar_inquilino_por_id(Integer id) {
+        return repositorio.findById(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Inquilino no encontrado"));
+    }
+
 }

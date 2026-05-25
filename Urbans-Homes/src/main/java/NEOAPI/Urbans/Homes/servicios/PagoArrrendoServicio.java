@@ -38,4 +38,34 @@ public class PagoArrrendoServicio {
         return repositorio.findAll();
     }
 
+    public PagoArriendo modificar_pago(Integer id, PagoArriendo datosPago) {
+        PagoArriendo pagoExistente = repositorio.findById(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pago no encontrado"));
+        
+        if (datosPago.getValorPago() > 0) {
+            pagoExistente.setValorPago(datosPago.getValorPago());
+        }
+        if (datosPago.getFechaPago() != null) {
+            pagoExistente.setFechaPago(datosPago.getFechaPago());
+        }
+        if (datosPago.getMesArriendo() != null && !datosPago.getMesArriendo().isBlank()) {
+            pagoExistente.setMesArriendo(datosPago.getMesArriendo());
+        }
+        
+        return repositorio.save(pagoExistente);
+    }
+
+    public String eliminar_pago(Integer id) {
+        if (!repositorio.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pago no encontrado");
+        }
+        repositorio.deleteById(id);
+        return "Pago eliminado correctamente";
+    }
+
+    public PagoArriendo buscar_pago_por_id(Integer id) {
+        return repositorio.findById(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pago no encontrado"));
+    }
+
 }

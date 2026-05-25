@@ -40,4 +40,34 @@ public class PropietariosServicio {
         return repositorio.findAll();
     }
 
+    public Propietarios modificar_propietario(Integer id, Propietarios datosPropietario) {
+        Propietarios propietarioExistente = repositorio.findById(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Propietario no encontrado"));
+        
+        if (datosPropietario.getNombreComp() != null && !datosPropietario.getNombreComp().isBlank()) {
+            propietarioExistente.setNombreComp(datosPropietario.getNombreComp());
+        }
+        if (datosPropietario.getCorreo() != null && !datosPropietario.getCorreo().isBlank()) {
+            propietarioExistente.setCorreo(datosPropietario.getCorreo());
+        }
+        if (datosPropietario.getNotel() != null && !datosPropietario.getNotel().isBlank()) {
+            propietarioExistente.setNotel(datosPropietario.getNotel());
+        }
+        
+        return repositorio.save(propietarioExistente);
+    }
+
+    public String eliminar_propietario(Integer id) {
+        if (!repositorio.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Propietario no encontrado");
+        }
+        repositorio.deleteById(id);
+        return "Propietario eliminado correctamente";
+    }
+
+    public Propietarios buscar_propietario_por_id(Integer id) {
+        return repositorio.findById(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Propietario no encontrado"));
+    }
+
 }

@@ -12,40 +12,39 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import NEOAPI.Urbans.Homes.Modelos.Usuario;
-import NEOAPI.Urbans.Homes.servicios.UsuarioServicio;
+import NEOAPI.Urbans.Homes.Modelos.Propietarios;
+import NEOAPI.Urbans.Homes.servicios.PropietariosServicio;
 
 
 @RestController
-@RequestMapping("/api/v1/usuarios")
-public class ControladorUsuario {
+@RequestMapping("/api/v1/propietarios")
+public class ControladorPropietarios {
 
     @Autowired
-    UsuarioServicio servicio;
+    PropietariosServicio servicio;
 
     @PostMapping
-    public ResponseEntity<?> guardar(@RequestBody Usuario datos){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.guardar_usuario(datos));
+    public ResponseEntity<?> guardar(@RequestBody Propietarios datos){
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.guardar_propietario(datos));
     }
 
     @GetMapping
     public ResponseEntity<?> listar(){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.listar_usuarios());
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.listar_propietarios());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> modificar(@PathVariable Integer id, @RequestBody Usuario datos){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.modificar_usuario(id, datos));
+    public ResponseEntity<?> modificar(@PathVariable Integer id, @RequestBody Propietarios datos){
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.modificar_propietario(id, datos));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Integer id){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.eliminar_usuario(id));
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.eliminar_propietario(id));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> buscar(@PathVariable Integer id){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.buscar_usuario_por_id(id));
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.buscar_propietario_por_id(id));
     }
 }
-

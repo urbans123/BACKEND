@@ -54,14 +54,37 @@ public class UsuarioServicio {
         return repositorio.findAll();
     }
 
-
     //funcion para modificar un usuario
+    public Usuario modificar_usuario(Integer id, Usuario datosUsuario){
+        Usuario usuarioExistente = repositorio.findById(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+        
+        if(datosUsuario.getNombres() != null && !datosUsuario.getNombres().isBlank()){
+            usuarioExistente.setNombres(datosUsuario.getNombres());
+        }
+        if(datosUsuario.getDocumento() != null && datosUsuario.getDocumento().length() >= 6){
+            usuarioExistente.setDocumento(datosUsuario.getDocumento());
+        }
+        if(datosUsuario.getEdad() != null){
+            usuarioExistente.setEdad(datosUsuario.getEdad());
+        }
+        
+        return repositorio.save(usuarioExistente);
+    }
 
     //funcion para eliminar un usuario
+    public String eliminar_usuario(Integer id){
+        if(!repositorio.existsById(id)){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado");
+        }
+        repositorio.deleteById(id);
+        return "Usuario eliminado correctamente";
+    }
 
     //funcion para buscar un usuario por id
-
-    //
-
+    public Usuario buscar_usuario_por_id(Integer id){
+        return repositorio.findById(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+    }
 
 }

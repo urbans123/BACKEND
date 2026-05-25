@@ -12,40 +12,39 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import NEOAPI.Urbans.Homes.Modelos.Usuario;
-import NEOAPI.Urbans.Homes.servicios.UsuarioServicio;
+import NEOAPI.Urbans.Homes.Modelos.Inquilinos;
+import NEOAPI.Urbans.Homes.servicios.InquilinosServicio;
 
 
 @RestController
-@RequestMapping("/api/v1/usuarios")
-public class ControladorUsuario {
+@RequestMapping("/api/v1/inquilinos")
+public class ControladorInquilinos {
 
     @Autowired
-    UsuarioServicio servicio;
+    InquilinosServicio servicio;
 
     @PostMapping
-    public ResponseEntity<?> guardar(@RequestBody Usuario datos){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.guardar_usuario(datos));
+    public ResponseEntity<?> guardar(@RequestBody Inquilinos datos){
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.guardar_inquilino(datos));
     }
 
     @GetMapping
     public ResponseEntity<?> listar(){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.listar_usuarios());
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.listar_inquilinos());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> modificar(@PathVariable Integer id, @RequestBody Usuario datos){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.modificar_usuario(id, datos));
+    public ResponseEntity<?> modificar(@PathVariable Integer id, @RequestBody Inquilinos datos){
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.modificar_inquilino(id, datos));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Integer id){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.eliminar_usuario(id));
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.eliminar_inquilino(id));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> buscar(@PathVariable Integer id){
-        return ResponseEntity.status(HttpStatus.OK).body(servicio.buscar_usuario_por_id(id));
+        return ResponseEntity.status(HttpStatus.OK).body(servicio.buscar_inquilino_por_id(id));
     }
 }
-
