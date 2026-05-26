@@ -1,20 +1,40 @@
 package NEOAPI.Urbans.Homes.Modelos;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "inmuebles")
 public class Inmuebles {
-    private int idInmueble;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idInmueble;
+
+    @Column(name = "direccion", nullable = false, length = 150)
     private String direccion;
+
+    @Column(name = "tipo_propiedad", nullable = false, length = 50)
     private String tipoDePropiedad;
-    private int nroHabitacion;
-    private int nroBanios;
-    private double areaM2;
+
+    @Column(name = "nro_habitaciones", nullable = false)
+    private Integer nroHabitacion;
+
+    @Column(name = "nro_banios", nullable = false)
+    private Integer nroBanios;
+
+    @Column(name = "area_m2", nullable = false)
+    private Double areaM2;
+
+    @Column(name = "descripcion", length = 300)
     private String descripcion;
-    private int idPropietarios;
+
+    @Column(name = "id_propietarios", nullable = false)
+    private Integer idPropietarios;
 
     public Inmuebles() {}
 
-    public Inmuebles(int idInmueble, String direccion, String tipoDePropiedad, int nroHabitacion, int nroBanios,
-                     double areaM2, String descripcion, int idPropietarios) {
-        this.idInmueble = idInmueble;
+    public Inmuebles(String direccion, String tipoDePropiedad, Integer nroHabitacion, Integer nroBanios,
+                     Double areaM2, String descripcion, Integer idPropietarios) {
         this.direccion = direccion;
         this.tipoDePropiedad = tipoDePropiedad;
         this.nroHabitacion = nroHabitacion;
@@ -24,80 +44,22 @@ public class Inmuebles {
         this.idPropietarios = idPropietarios;
     }
 
-    public Inmuebles(String direccion, String tipoDePropiedad, int nroHabitacion, int nroBanios,
-                     double areaM2, String descripcion, int idPropietarios) {
-        this.direccion = direccion;
-        this.tipoDePropiedad = tipoDePropiedad;
-        this.nroHabitacion = nroHabitacion;
-        this.nroBanios = nroBanios;
-        this.areaM2 = areaM2;
-        this.descripcion = descripcion;
-        this.idPropietarios = idPropietarios;
-    }
-
-    public int getIdInmueble() {
-        return idInmueble;
-    }
-
-    public void setIdInmueble(int idInmueble) {
-        this.idInmueble = idInmueble;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getTipoDePropiedad() {
-        return tipoDePropiedad;
-    }
-
-    public void setTipoDePropiedad(String tipoDePropiedad) {
-        this.tipoDePropiedad = tipoDePropiedad;
-    }
-
-    public int getNroHabitacion() {
-        return nroHabitacion;
-    }
-
-    public void setNroHabitacion(int nroHabitacion) {
-        this.nroHabitacion = nroHabitacion;
-    }
-
-    public int getNroBanios() {
-        return nroBanios;
-    }
-
-    public void setNroBanios(int nroBanios) {
-        this.nroBanios = nroBanios;
-    }
-
-    public double getAreaM2() {
-        return areaM2;
-    }
-
-    public void setAreaM2(double areaM2) {
-        this.areaM2 = areaM2;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public int getIdPropietarios() {
-        return idPropietarios;
-    }
-
-    public void setIdPropietarios(int idPropietarios) {
-        this.idPropietarios = idPropietarios;
-    }
+    public Integer getIdInmueble() { return idInmueble; }
+    public void setIdInmueble(Integer idInmueble) { this.idInmueble = idInmueble; }
+    public String getDireccion() { return direccion; }
+    public void setDireccion(String direccion) { this.direccion = direccion; }
+    public String getTipoDePropiedad() { return tipoDePropiedad; }
+    public void setTipoDePropiedad(String tipoDePropiedad) { this.tipoDePropiedad = tipoDePropiedad; }
+    public Integer getNroHabitacion() { return nroHabitacion; }
+    public void setNroHabitacion(Integer nroHabitacion) { this.nroHabitacion = nroHabitacion; }
+    public Integer getNroBanios() { return nroBanios; }
+    public void setNroBanios(Integer nroBanios) { this.nroBanios = nroBanios; }
+    public Double getAreaM2() { return areaM2; }
+    public void setAreaM2(Double areaM2) { this.areaM2 = areaM2; }
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public Integer getIdPropietarios() { return idPropietarios; }
+    public void setIdPropietarios(Integer idPropietarios) { this.idPropietarios = idPropietarios; }
 
     @Override
     public String toString() {
